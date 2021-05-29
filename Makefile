@@ -51,7 +51,7 @@ debug-router:
 
 ## CS
 cs:
-	@$(EXECUTE_APP) vendor/bin/php-cs-fixer fix src
+	@$(EXECUTE_APP) vendor/bin/php-cs-fixer fix src --verbose
 .PHONE: cs
 
 sync-start:
