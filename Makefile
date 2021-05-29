@@ -10,6 +10,10 @@ down:
 	$(DOCKER_COMPOSE) down --remove-orphans
 .PHONY: down
 
+pull:
+	$(DOCKER_COMPOSE) pull
+.PHONY: pull
+
 clean:
 	$(DOCKER_COMPOSE) rm --force --stop
 .PHONY: clean
