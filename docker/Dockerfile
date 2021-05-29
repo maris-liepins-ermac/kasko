@@ -7,9 +7,26 @@ LABEL Maintainer="Maris Liepins" \
 
 RUN apt-get update && apt-get install -y \
     build-essential \
+    libicu-dev \
+    libzip-dev \
     locales \
+    libonig-dev \
+    curl \
+    zip \
+    unzip \
+    git \
     curl \
     wget
+
+RUN docker-php-ext-configure zip
+
+RUN docker-php-ext-install \
+        bcmath \
+        mbstring \
+        pcntl \
+        intl \
+        zip \
+        opcache
 
 RUN pecl install \
         apcu-${APCU_VERSION} \

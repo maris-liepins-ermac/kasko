@@ -10,6 +10,10 @@ down:
 	$(DOCKER_COMPOSE) down --remove-orphans
 .PHONY: down
 
+pull:
+	$(DOCKER_COMPOSE) pull
+.PHONY: pull
+
 clean:
 	$(DOCKER_COMPOSE) rm --force --stop
 .PHONY: clean
@@ -47,7 +51,7 @@ debug-router:
 
 ## CS
 cs:
-	@$(EXECUTE_APP) vendor/bin/php-cs-fixer fix src
+	@$(EXECUTE_APP) vendor/bin/php-cs-fixer fix src --verbose
 .PHONE: cs
 
 sync-start:
