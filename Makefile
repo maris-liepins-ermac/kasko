@@ -1,6 +1,7 @@
 DOCKER_COMPOSE ?= winpty docker-compose
 EXECUTE_APP ?= $(DOCKER_COMPOSE) exec app
 EXECUTE_DB ?= $(DOCKER_COMPOSE) exec db
+PHP ?= $(DOCKER_COMPOSE) run --rm --no-deps app
 
 up:
 	$(DOCKER_COMPOSE) up --remove-orphans -d
@@ -29,9 +30,6 @@ up-app:
 build: build-install
 .PHONY: build
 
-build-install: up-app
-.PHONY: build-install
-
 ssh:
 	@$(EXECUTE_APP) bash
 .PHONY: ssh
@@ -39,10 +37,6 @@ ssh:
 composer-install:
 	@$(EXECUTE_APP) composer install
 .PHONY: composer-install
-
-cc:
-	@$(EXECUTE_APP) php bin/console cache:clear
-.PHONY: cc
 
 ## DEBUG
 debug-router:
@@ -57,3 +51,12 @@ cs:
 sync-start:
 	@$(EXECUTE_APP) docker-sync start
 .PHONE: docker-sync start
+
+# Tests
+build-codecept:
+	$(PHP) vendor/bin/codecept build
+.PHONY: build-codecept
+
+test-unit: build-codecept
+	$(PHP) vendor/bin/codecept run unit -vvv --steps
+.PHONY: test-unit

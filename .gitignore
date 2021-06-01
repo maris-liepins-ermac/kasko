@@ -6,8 +6,8 @@
 /public/bundles/
 /var/
 /vendor/
-
-###> friendsofphp/php-cs-fixer ###
+/storage/
 /.php-cs-fixer.php
 /.php-cs-fixer.cache
-###< friendsofphp/php-cs-fixer ###
+/phpunit.xml
+.phpunit.result.cache
